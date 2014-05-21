@@ -22,13 +22,11 @@ import java.security.PrivilegedExceptionAction;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.security.auth.Subject;
 import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.login.AppConfigurationEntry;
 import javax.security.auth.login.Configuration;
 import javax.security.auth.login.LoginContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.ietf.jgss.GSSContext;
@@ -87,8 +85,7 @@ public class SunJaasKerberosTicketValidator implements KerberosTicketValidator, 
      * prefixes like <code>file:</code> or <code>classpath:</code>, but as the
      * file is later on read by JAAS, we cannot guarantee that <code>classpath</code>
      * works in every environment, esp. not in Java EE application servers. You
-     * should use <code>file:</code> there.<br />
-     * <br />
+     * should use <code>file:</code> there.<p>
      * This file also needs special protection, which is another reason to
      * not include it in the classpath but rather use <code>file:/etc/http.keytab</code>
      * for example.

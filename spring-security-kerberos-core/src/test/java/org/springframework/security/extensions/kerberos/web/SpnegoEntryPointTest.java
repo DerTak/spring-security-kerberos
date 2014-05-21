@@ -15,11 +15,10 @@
  */
 package org.springframework.security.extensions.kerberos.web;
 
-import static org.mockito.Mockito.*;
-
 import javax.servlet.http.HttpServletResponse;
-
 import org.junit.Test;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * Test class for {@link SpnegoEntryPoint}

@@ -13,24 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.springframework.security.extensions.kerberos;
 
 import java.util.Arrays;
 import java.util.Collection;
-
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.extensions.kerberos.web.SpnegoAuthenticationProcessingFilter;
 
 /**
- * Holds the Kerberos/SPNEGO token for requesting a kerberized service
- * and is also the output of <code>KerberosServiceAuthenticationProvider</code>.<br>
+ * Holds the Kerberos/SPNEGO token for requesting a kerberized service and is
+ * also the output of <code>KerberosServiceAuthenticationProvider</code>.<br>
  * Will mostly be created in <code>SpnegoAuthenticationProcessingFilter</code>
  * and authenticated in <code>KerberosServiceAuthenticationProvider</code>.
  *
- * This token cannot be re-authenticated, as you will get a Kerberos Reply error.
+ * This token cannot be re-authenticated, as you will get a Kerberos Reply
+ * error.
  *
  * @author Mike Wiesner
  * @since 1.0
@@ -38,15 +37,18 @@ import org.springframework.security.extensions.kerberos.web.SpnegoAuthentication
  * @see KerberosServiceAuthenticationProvider
  * @see SpnegoAuthenticationProcessingFilter
  */
-
 public class KerberosServiceRequestToken extends AbstractAuthenticationToken {
 
     private static final long serialVersionUID = 395488921064775014L;
     private final byte[] token;
     private final Object principal;
 
-    /** Creates an authenticated token, normally used as an output of an authentication provider.
-     * @param principal the user principal (mostly of instance <code>UserDetails</code>
+    /**
+     * Creates an authenticated token, normally used as an output of an
+     * authentication provider.
+     *
+     * @param principal the user principal (mostly of instance
+     * <code>UserDetails</code>
      * @param authorities the authorities which are granted to the user
      * @param token the Kerberos/SPNEGO token
      * @see UserDetails
@@ -60,7 +62,7 @@ public class KerberosServiceRequestToken extends AbstractAuthenticationToken {
 
     /**
      * Creates an unauthenticated instance which should then be authenticated by
-     * <code>KerberosServiceAuthenticationProvider/code>
+     * <code>KerberosServiceAuthenticationProvider</code>
      *
      * @param token Kerberos/SPNEGO token
      * @see KerberosServiceAuthenticationProvider
@@ -73,6 +75,7 @@ public class KerberosServiceRequestToken extends AbstractAuthenticationToken {
 
     /**
      * Calculates hashcode based on the Kerberos token
+     * @return int hashcode
      */
     @Override
     public int hashCode() {
@@ -84,24 +87,30 @@ public class KerberosServiceRequestToken extends AbstractAuthenticationToken {
 
     /**
      * equals() is based only on the Kerberos token
+     * @return if equals
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (!super.equals(obj))
+        }
+        if (!super.equals(obj)) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         KerberosServiceRequestToken other = (KerberosServiceRequestToken) obj;
-        if (!Arrays.equals(token, other.token))
+        if (!Arrays.equals(token, other.token)) {
             return false;
+        }
         return true;
     }
 
     /* (non-Javadoc)
      * @see org.springframework.security.core.Authentication#getCredentials()
      */
+    @Override
     public Object getCredentials() {
         return null;
     }
@@ -109,11 +118,15 @@ public class KerberosServiceRequestToken extends AbstractAuthenticationToken {
     /* (non-Javadoc)
      * @see org.springframework.security.core.Authentication#getPrincipal()
      */
+    @Override
     public Object getPrincipal() {
         return this.principal;
     }
 
-    /** Returns the Kerberos token
+    /**
+     * Returns the Kerberos token
+     *
+     * @return the token
      */
     public byte[] getToken() {
         return this.token;
